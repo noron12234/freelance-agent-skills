@@ -1,0 +1,7 @@
+# 這個 repo 是 Claude Code skill 文件庫，不是 HTML 專案
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+skills/**/*.html linguist-vendored=true
+skills/**/*.css linguist-vendored=true
+skills/**/*.tsx linguist-vendored=true
+skills/**/*.mjs linguist-vendored=true
