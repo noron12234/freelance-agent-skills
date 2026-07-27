@@ -1,3 +1,5 @@
+**English** · [繁體中文](README.zh-TW.md)
+
 # Freelance Agent Skills
 
 A set of 11 [Claude Code](https://claude.com/claude-code) skills that automate the parts of solo software consulting that aren't writing code — proposals, client revisions, launch monitoring, documentation, and analytics.
