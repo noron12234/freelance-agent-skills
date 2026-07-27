@@ -1,0 +1,23 @@
+// 把 使用說明書.html 轉成 PDF
+import { chromium } from "playwright";
+
+const HTML_PATH = "/Users/linjunrong/Desktop/test/waiting-list/manual/使用說明書.html";
+const PDF_PATH = "/Users/linjunrong/Desktop/test/waiting-list/manual/協作徵稿平台_使用說明書.pdf";
+
+const browser = await chromium.launch();
+const page = await browser.newPage();
+await page.goto(`file://${HTML_PATH}`, { waitUntil: "networkidle" });
+// 等字體載入 + 圖片
+await page.waitForFunction(() => document.fonts.ready);
+await new Promise(r => setTimeout(r, 1500));
+
+await page.pdf({
+  path: PDF_PATH,
+  format: "A4",
+  printBackground: true,
+  preferCSSPageSize: true,
+  margin: { top: "18mm", bottom: "22mm", left: "16mm", right: "16mm" },
+});
+
+await browser.close();
+console.log(`✓ PDF generated: ${PDF_PATH}`);

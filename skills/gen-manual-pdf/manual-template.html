@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>協作徵稿平台 編輯部操作手冊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 18mm;
+  }
+  :root {
+    --ink: #1a1614;
+    --ink-2: #4a4239;
+    --paper: #faf7ee;
+    --paper-2: #f2ebda;
+    --paper-3: #ece3c8;
+    --rule: #d4cdb5;
+    --rule-soft: #e8e0c6;
+    --accent: #b8442e;
+    --accent-2: #8b3522;
+    --gold: #c9a961;
+    --green: #5e7142;
+    --blue: #3a5683;
+    --muted: #8a8170;
+    --serif: "Noto Serif TC", serif;
+    --sans: "Noto Sans TC", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--sans);
+    font-size: 11pt;
+    line-height: 1.8;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  h1, h2, h3, h4 { font-family: var(--serif); margin: 0; }
+
+  /* Cover */
+  .cover {
+    min-height: 260mm;
+    padding: 50mm 12mm 25mm;
+    page-break-after: always;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-band {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28mm;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8mm 14mm;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cover-band .brand {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .cover-band .brand strong { color: var(--gold); }
+  .cover-band .who {
+    font-family: var(--mono);
+    font-size: 9pt;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+  }
+  .cover-blob {
+    position: absolute;
+    top: 50mm;
+    right: -30mm;
+    width: 130mm;
+    height: 130mm;
+    background: radial-gradient(circle at 30% 30%, var(--accent) 0%, transparent 65%);
+    opacity: 0.18;
+  }
+  .cover-tag {
+    font-family: var(--mono);
+    font-size: 9pt;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 4mm;
+  }
+  .cover-title {
+    font-family: var(--serif);
+    font-size: 48pt;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .cover-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .cover-sub {
+    font-family: var(--serif);
+    font-size: 18pt;
+    color: var(--ink-2);
+    margin-top: 6mm;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .cover-promise {
+    margin-top: 12mm;
+    padding: 6mm 8mm;
+    background: var(--paper-2);
+    border-left: 4px solid var(--accent);
+    font-size: 11pt;
+    line-height: 1.85;
+    color: var(--ink-2);
+    max-width: 130mm;
+  }
+  .cover-promise strong { color: var(--ink); }
+  .cover-bottom {
+    position: absolute;
+    bottom: 24mm;
+    left: 14mm;
+    right: 14mm;
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--rule);
+    padding-top: 6mm;
+  }
+  .cover-bottom .who { line-height: 1.8; }
+  .cover-bottom .who strong { color: var(--ink); display: block; font-size: 10pt; }
+  .cover-bottom .url {
+    font-family: var(--mono);
+    font-size: 10pt;
+    color: var(--ink);
+  }
+
+  /* TOC */
+  .toc {
+    page-break-after: always;
+  }
+  .toc h2 {
+    font-size: 28pt;
+    margin-bottom: 4mm;
+    padding-bottom: 4mm;
+    color: var(--ink);
+  }
+  .toc-sub {
+    font-size: 11pt;
+    color: var(--muted);
+    margin-bottom: 14mm;
+  }
+  .toc-part {
+    margin-bottom: 10mm;
+  }
+  .toc-part .pt {
+    font-family: var(--mono);
+    font-size: 9pt;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 2mm;
+  }
+  .toc-part .pt-title {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4mm;
+    padding-bottom: 2mm;
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-part ul {
+    list-style: none;
+    padding-left: 4mm;
+    margin: 0;
+  }
+  .toc-part li {
+    padding: 2mm 0;
+    font-size: 11pt;
+    display: flex;
+    gap: 4mm;
+  }
+  .toc-part li .num {
+    font-family: var(--mono);
+    color: var(--muted);
+    font-size: 9pt;
+    width: 12mm;
+    flex-shrink: 0;
+  }
+
+  /* Part divider page */
+  .part-divider {
+    page-break-before: always;
+    page-break-after: always;
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 250mm;
+    padding: 70mm 18mm 20mm;
+    position: relative;
+  }
+  .part-divider .pt-label {
+    font-family: var(--mono);
+    font-size: 11pt;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 8mm;
+  }
+  .part-divider .pt-num {
+    font-family: var(--serif);
+    font-size: 120pt;
+    font-weight: 900;
+    line-height: 0.85;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: 50mm;
+    right: 14mm;
+    margin: 0;
+  }
+  .part-divider .pt-title {
+    font-family: var(--serif);
+    font-size: 38pt;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--paper);
+  }
+  .part-divider .pt-sub {
+    font-family: var(--serif);
+    font-size: 14pt;
+    line-height: 1.65;
+    color: var(--paper-2);
+    opacity: 0.85;
+    margin-top: 8mm;
+    max-width: 130mm;
+  }
+
+  /* Chapter */
+  .chapter {
+    page-break-before: always;
+  }
+  .ch-tag {
+    font-family: var(--mono);
+    font-size: 9pt;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 3mm;
+  }
+  .chapter h2 {
+    font-size: 22pt;
+    color: var(--ink);
+    margin-bottom: 4mm;
+    padding-bottom: 4mm;
+    border-bottom: 2px solid var(--ink);
+    line-height: 1.2;
+  }
+  .chapter h2 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .ch-intro {
+    font-family: var(--serif);
+    font-size: 12pt;
+    color: var(--ink-2);
+    line-height: 1.85;
+    margin: 4mm 0 8mm;
+  }
+  .chapter h3 {
+    font-size: 14pt;
+    margin: 8mm 0 3mm;
+    color: var(--ink);
+    padding-left: 4mm;
+    border-left: 4px solid var(--accent);
+  }
+  .chapter p { margin: 0 0 3mm 0; }
+
+  /* Figure */
+  figure {
+    margin: 5mm 0 6mm;
+    page-break-inside: avoid;
+  }
+  figure img {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid var(--rule);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    display: block;
+  }
+  figure figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--muted);
+    margin-top: 2mm;
+    line-height: 1.6;
+    padding-left: 4mm;
+    border-left: 2px solid var(--rule);
+  }
+
+  /* Step list */
+  ol.steps {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+    margin: 4mm 0 6mm;
+  }
+  ol.steps > li {
+    counter-increment: step;
+    padding: 3mm 0 3mm 14mm;
+    position: relative;
+    line-height: 1.75;
+    border-bottom: 1px dashed var(--rule-soft);
+  }
+  ol.steps > li:last-child { border-bottom: none; }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 3mm;
+    width: 9mm;
+    height: 9mm;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 50%;
+    font-family: var(--mono);
+    font-size: 10pt;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ol.steps > li strong { color: var(--accent-2); }
+
+  /* Callout */
+  .callout {
+    background: var(--paper-2);
+    border-left: 4px solid var(--accent);
+    padding: 4mm 6mm;
+    margin: 5mm 0;
+    font-size: 10.5pt;
+    line-height: 1.75;
+  }
+  .callout strong { color: var(--accent-2); }
+  .callout.warn {
+    background: rgba(199,62,29,0.08);
+    border-left-color: var(--accent);
+  }
+  .callout.ok {
+    background: rgba(94,113,66,0.08);
+    border-left-color: var(--green);
+  }
+  .callout.tip {
+    background: rgba(201,169,97,0.14);
+    border-left-color: var(--gold);
+  }
+  .callout .title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 12pt;
+    color: var(--ink);
+    margin-bottom: 2mm;
+  }
+
+  /* Q&A */
+  .qa-q {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 8mm;
+    margin-bottom: 2mm;
+    padding-left: 10mm;
+    position: relative;
+  }
+  .qa-q::before {
+    content: "Q";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7mm;
+    height: 7mm;
+    background: var(--ink);
+    color: var(--gold);
+    border-radius: 50%;
+    font-family: var(--serif);
+    font-size: 10pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qa-a {
+    padding-left: 10mm;
+    color: var(--ink-2);
+    line-height: 1.85;
+  }
+
+  /* Status badge */
+  .badge {
+    display: inline-block;
+    padding: 0.5mm 2.5mm;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 8.5pt;
+    font-weight: 500;
+    margin: 0 0.5mm;
+    vertical-align: middle;
+  }
+  .badge.ok { background: var(--green); color: var(--paper); }
+  .badge.warn { background: var(--gold); color: var(--ink); }
+  .badge.danger { background: var(--accent); color: var(--paper); }
+  .badge.blue { background: var(--blue); color: var(--paper); }
+  .badge.gray { background: var(--muted); color: var(--paper); }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 6mm;
+    font-size: 10pt;
+  }
+  table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3mm 4mm;
+    text-align: left;
+    font-weight: 500;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+  }
+  table td {
+    padding: 3mm 4mm;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+  table tr:nth-child(even) td { background: var(--paper-2); }
+  code {
+    font-family: var(--mono);
+    font-size: 9pt;
+    background: var(--paper-3);
+    padding: 0.5mm 2mm;
+    border-radius: 2px;
+    color: var(--accent-2);
+  }
+
+  /* Big number callout */
+  .bignum {
+    display: flex;
+    gap: 6mm;
+    margin: 5mm 0;
+  }
+  .bignum .box {
+    flex: 1;
+    padding: 5mm;
+    background: var(--paper-2);
+    border-left: 4px solid var(--ink);
+  }
+  .bignum .n {
+    font-family: var(--serif);
+    font-size: 32pt;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 2mm;
+  }
+  .bignum .l {
+    font-size: 10pt;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Doc footer */
+  .doc-footer {
+    margin-top: 14mm;
+    padding-top: 4mm;
+    border-top: 1px solid var(--rule);
+    font-size: 9pt;
+    color: var(--muted);
+    text-align: center;
+    font-family: var(--sans);
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ 封面 ════════════════ -->
+<section class="cover">
+  <div class="cover-band">
+    <span class="brand">協作徵稿平台 <strong>2027</strong></span>
+    <span class="who">USER MANUAL · FOR EDITORS</span>
+  </div>
+  <div class="cover-blob"></div>
+
+  <div class="cover-tag">EDITOR HANDBOOK · 編輯部操作手冊</div>
+  <h1 class="cover-title">後台<br>怎麼用<em>？</em></h1>
+  <p class="cover-sub">從投稿者投稿、你審稿、撞期裁決、<br>到入選通知、收地址、出貨 — 一本看完。</p>
+
+  <div class="cover-promise">
+    <strong>給沒用過後台的人。</strong>每一步都有截圖、每一個按鈕都告訴你按下去會發生什麼。
+    讀完這本你就會用全部功能。
+  </div>
+
+  <div class="cover-bottom">
+    <div class="who">
+      <strong>客戶</strong>
+      冠球彩色印刷股份有限公司（客戶A）
+    </div>
+    <div class="url">
+      your-project.vercel.app
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ 目錄 ════════════════ -->
+<section class="toc">
+  <h2>目錄</h2>
+  <p class="toc-sub">分成 5 個部分、照「你會做的事情」順序排</p>
+
+  <div class="toc-part">
+    <div class="pt">PART 01 · 第一次使用</div>
+    <div class="pt-title">三分鐘設定指南</div>
+    <ul>
+      <li><span class="num">CH 1</span>怎麼進後台、密碼是什麼</li>
+      <li><span class="num">CH 2</span>設定 Gmail 寄信帳號（一次性、設完就不用碰了）</li>
+    </ul>
+  </div>
+
+  <div class="toc-part">
+    <div class="pt">PART 02 · 投稿者那邊看到什麼</div>
+    <div class="pt-title">了解投稿者的旅程</div>
+    <ul>
+      <li><span class="num">CH 3</span>投稿者進首頁、看到的畫面</li>
+      <li><span class="num">CH 4</span>投稿者怎麼填投稿表單（三個步驟）</li>
+      <li><span class="num">CH 5</span>投稿者點 Email 驗證連結會發生什麼</li>
+    </ul>
+  </div>
+
+  <div class="toc-part">
+    <div class="pt">PART 03 · 你的日常 — 審稿流程</div>
+    <div class="pt-title">每天最常用的功能</div>
+    <ul>
+      <li><span class="num">CH 6</span>進收件匣、認識每個區塊</li>
+      <li><span class="num">CH 7</span>點進一篇稿件來審</li>
+      <li><span class="num">CH 8</span>改狀態 + 寄信前的預覽確認</li>
+      <li><span class="num">CH 9</span>同一天好幾人投、怎麼辦？撞期裁決</li>
+    </ul>
+  </div>
+
+  <div class="toc-part">
+    <div class="pt">PART 04 · 入選名單確定後</div>
+    <div class="pt-title">從入選通知到出貨</div>
+    <ul>
+      <li><span class="num">CH 10</span>看 365 日曆確認年度覆蓋率</li>
+      <li><span class="num">CH 11</span>地址催收 — 找出沒填地址的人</li>
+      <li><span class="num">CH 12</span>製稿匯出 — 給美工設計師的 Excel</li>
+      <li><span class="num">CH 13</span>出貨 — 填單號 + 寄出貨通知信</li>
+    </ul>
+  </div>
+
+  <div class="toc-part">
+    <div class="pt">PART 05 · 進階設定 + FAQ</div>
+    <div class="pt-title">需要時再翻</div>
+    <ul>
+      <li><span class="num">CH 14</span>編輯通知信模板（Email 內容自己改）</li>
+      <li><span class="num">CH 15</span>發信紀錄 — 客服查詢用</li>
+      <li><span class="num">CH 16</span>常見問題 7 題</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════ PART 01 ════════════════ -->
+<section class="part-divider">
+  <div class="pt-label">PART 01</div>
+  <div class="pt-num">01</div>
+  <h2 class="pt-title">第一次使用<br>三分鐘設定指南</h2>
+  <p class="pt-sub">
+    這本書你只需要從頭讀「Part 1」一次、設定完之後就可以開始用。
+    後面的部分隨用隨翻。
+  </p>
+</section>
+
+<!-- CH 1 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 01</div>
+  <h2>怎麼進後台、<em>密碼是什麼</em></h2>
+  <p class="ch-intro">
+    後台不是公開網址、只有編輯部進得去。進去要密碼。
+  </p>
+
+  <h3>步驟</h3>
+  <ol class="steps">
+    <li>打開瀏覽器、進這個網址：<code>your-project.vercel.app/admin</code></li>
+    <li>沒登入會自動跳到登入頁、看到一個密碼欄位（如下圖）</li>
+    <li>輸入你的密碼、按 <strong>登入</strong></li>
+    <li>登入成功就會看到「收件匣」、後台從這裡開始</li>
+  </ol>
+
+  <figure>
+    <img src="08_admin_login.png">
+    <figcaption>登入頁。密碼問次元創意拿、會單獨給你。</figcaption>
+  </figure>
+
+  <div class="callout warn">
+    <div class="title">⚠ 連續打錯 5 次會被鎖 15 分鐘</div>
+    這是安全機制、防有人猜密碼。如果不小心打錯太多次、休息一下再試。
+  </div>
+</section>
+
+<!-- CH 2 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 02</div>
+  <h2>設定 Gmail 寄信帳號<br><em>一次性、設完就不用碰了</em></h2>
+  <p class="ch-intro">
+    系統會自動寄信給投稿者（驗證信、入選通知、出貨通知等等）。
+    寄信要用一個 Gmail 帳號。<strong>這個帳號是「編輯部用來寄出去」用的、不是投稿者填的那個</strong>。
+  </p>
+
+  <h3>為什麼要設？沒設會怎樣？</h3>
+  <p>
+    沒設 = 系統<strong>不會寄任何信</strong>。投稿者投稿後不會收到驗證信、入選通知也不會寄。
+    後台上方會出現紅色警告告訴你還沒設。
+  </p>
+
+  <h3>準備：先去 Google 申請「應用程式密碼」</h3>
+  <p>
+    這個密碼<strong>不是你登入 Gmail 用的密碼</strong>、是 Google 特別給「機器人寄信」用的 16 碼。
+  </p>
+  <ol class="steps">
+    <li>打開 <code>myaccount.google.com/security</code></li>
+    <li>開啟「<strong>兩步驟驗證</strong>」（如果還沒開的話）</li>
+    <li>打開 <code>myaccount.google.com/apppasswords</code></li>
+    <li>應用程式名稱輸入「協作徵稿平台」、按產生</li>
+    <li>Google 給你一串 <strong>16 個字母</strong>（看起來像 <code>abcd efgh ijkl mnop</code>）</li>
+    <li>複製這 16 個字母備用</li>
+  </ol>
+
+  <h3>在後台填進去</h3>
+  <ol class="steps">
+    <li>後台 sidebar 點「<strong>網站設定</strong>」（最下面那個）</li>
+    <li>往下滑到「📧 Gmail 寄信帳號」區塊（如下圖）</li>
+    <li>「Gmail 帳號」填你的 Gmail 信箱（如 <code>hello@example.com</code>）</li>
+    <li>「應用程式密碼」貼上剛剛拿到的 16 碼</li>
+    <li>「寄件人顯示名稱」可以寫「協作徵稿平台 編輯部」之類、收件人會看到</li>
+    <li>按 <strong>儲存設定</strong></li>
+    <li>按 <strong>✉ 寄一封測試信</strong> 確認真的能寄出（會寄到你剛剛填的那個 Gmail）</li>
+  </ol>
+
+  <figure>
+    <img src="19_admin_settings.png">
+    <figcaption>網站設定頁。上半是一般設定、下半是 Gmail 寄信設定。</figcaption>
+  </figure>
+
+  <div class="callout ok">
+    <div class="title">✓ 設完之後</div>
+    後台上方紅色警告 banner 會自動消失、所有寄信功能啟動。<strong>之後完全不用再碰這頁、除非你想換 Gmail 帳號</strong>。
+  </div>
+
+  <div class="callout tip">
+    <div class="title">💡 一個小貼士</div>
+    建議用「<strong>編輯部專屬</strong>」的 Gmail 帳號、不要用個人 Gmail。理由：
+    <br>① 收件人看到寄件人是 <code>hello@example.com</code> 比看到 <code>個人名字@gmail.com</code> 更有品牌感
+    <br>② 之後活動結束、你不會看到一堆退信塞滿個人信箱
+  </div>
+</section>
+
+<!-- ════════════════ PART 02 ════════════════ -->
+<section class="part-divider">
+  <div class="pt-label">PART 02</div>
+  <div class="pt-num">02</div>
+  <h2 class="pt-title">投稿者那邊<br>看到什麼？</h2>
+  <p class="pt-sub">
+    這部分讓你理解投稿者的旅程 — 他們從首頁進來、填表、收信、點驗證、看到「投稿成功」。
+    你不用做什麼、但客服時會很有用：當投稿者問「我投了沒收到信怎麼辦」、你知道流程是怎麼運作的。
+  </p>
+</section>
+
+<!-- CH 3 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 03</div>
+  <h2>投稿者進首頁、<em>看到的畫面</em></h2>
+  <p class="ch-intro">
+    投稿者進 <code>your-project.vercel.app</code> 會看到一個視覺很強的首頁、
+    重點 CTA 是「✍ 投稿你的故事」、點下去就進投稿表單。
+  </p>
+
+  <figure>
+    <img src="01_homepage_hero.png">
+    <figcaption>首頁主視覺。右上角「✍ 投稿你的故事」是主 CTA、點下去進投稿表單。左下顯示活動資訊（總頁數、限量本數、價位）。</figcaption>
+  </figure>
+
+  <p>頁面往下滑會看到範例故事、徵稿辦法說明、再下面有底部 CTA 區塊一直引導投稿者進入表單。</p>
+</section>
+
+<!-- CH 4 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 04</div>
+  <h2>投稿者怎麼填投稿表單<br><em>三個步驟</em></h2>
+  <p class="ch-intro">
+    投稿表單分三個區塊：「選日期」「寫故事」「投稿者資訊」。
+    所有東西在同一頁、投稿者往下滑就會看到全部、不用換頁。
+  </p>
+
+  <h3>第一步 · 選一個日期（可選 1-3 個志願）</h3>
+  <p>
+    這是<strong>整個系統最重要的設計</strong>。投稿者選的不是「我這個故事只能刊在這天」、
+    而是「我願意我這個故事被刊在這三天的其中一天」。
+  </p>
+
+  <figure>
+    <img src="02_submit_step1_date.png">
+    <figcaption>第一步：選一個日期。首選必填、次選/三選選填。撞期時系統會自動依志願順序處理。</figcaption>
+  </figure>
+
+  <div class="callout tip">
+    <div class="title">💡 為什麼要三個志願？</div>
+    去年很多人都搶熱門日（情人節、母親節、聖誕節）。一個日期只能選一篇、
+    剩下的人就要寫信問「你能換一天嗎」、來回 14+ 輪。<strong>今年讓投稿者一次就告訴你三個願意的日期、撞期時系統自動把次選的人補到他的志願二、你完全不用寫信</strong>。
+  </div>
+
+  <div class="callout">
+    <div class="title">三個志願適合哪種故事？</div>
+    並不是每個故事都適合填三個日期。會有兩種狀況：
+    <ul style="margin-top: 2mm; line-height: 1.85;">
+      <li><strong>故事跟特定日期強綁定</strong>（如「我們在 5/21 那天搬家」「2007 年 7 月 7 日她跟我說再見」）→ 投稿者只應該填 1 個。撞期時如果他不願意換、後台會走「需改期」流程、你還是要單獨聯絡他。</li>
+      <li><strong>故事是「主題」對應</strong>（如「奶奶的縫紉機」可放母親節 / 奶奶生日 / 清明節）→ 投稿者才適合填 2-3 個志願、撞期時系統自動遞補。</li>
+    </ul>
+    投稿表單上次選/三選是<strong>選填</strong>、投稿者可以只填首選。
+  </div>
+
+  <h3>第二步 · 寫下故事（300–1000 字）</h3>
+
+  <figure>
+    <img src="03_submit_step2_story.png">
+    <figcaption>第二步：故事標題 + 內文。下面有即時字數計算、超過 1000 字會跳紅字提醒。再下面是主題標籤（青春、家人、節日等）給投稿者選 1-2 個分類。</figcaption>
+  </figure>
+
+  <h3>第三步 · 上傳照片 + 投稿者資訊</h3>
+
+  <figure>
+    <img src="04_submit_step3_upload.png">
+    <figcaption>上傳照片區塊。系統會自動拒絕：不是 JPG/PNG 的格式、超過 2MB 的檔案、超過 5 張的照片。投稿者資訊（姓名、Email、電話、城市）也在這段填。</figcaption>
+  </figure>
+
+  <h3>最後 · 同意條款、送出</h3>
+
+  <figure>
+    <img src="05_submit_consent.png">
+    <figcaption>送出前要勾「同意投稿規範與內容授權」。如果有填電話、會多一個「同意電話聯絡」要勾。</figcaption>
+  </figure>
+
+  <p>送出後投稿者看到一張「投稿成功」頁、系統同時自動寄一封 Email 驗證信到他填的信箱：</p>
+
+  <figure>
+    <img src="06_thank_you.png">
+    <figcaption>投稿成功頁。告訴投稿者「請去信箱點驗證連結」。</figcaption>
+  </figure>
+</section>
+
+<!-- CH 5 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 05</div>
+  <h2>投稿者點 Email 驗證連結<br><em>會發生什麼</em></h2>
+  <p class="ch-intro">
+    投稿者送出表單後、系統會立刻寄一封信給他、信裡有一個按鈕「確認 Email」。
+    他點下去就完成驗證、稿件才會出現在你的「待審」清單。
+  </p>
+
+  <h3>為什麼需要這一步？</h3>
+  <p>
+    防止有人填假信箱灌水投稿。也確保你之後寄入選通知的時候、那個信箱真的會收到信。
+  </p>
+
+  <h3>狀態變化</h3>
+  <table>
+    <tr><th style="width:30%">時間點</th><th>稿件狀態</th></tr>
+    <tr><td>投稿者送出表單</td><td><span class="badge gray">待驗證 Email</span> ← 你<strong>看不到</strong>內容（防灌水）</td></tr>
+    <tr><td>系統自動寄驗證信</td><td>同上</td></tr>
+    <tr><td>投稿者點信中連結</td><td><span class="badge ok">待審</span> ← 進到你的審稿池</td></tr>
+    <tr><td>系統再自動寄「投稿成功確認信」</td><td>同上</td></tr>
+  </table>
+
+  <div class="callout">
+    <div class="title">投稿者來信問「我投了沒收到信怎麼辦」？</div>
+    去「<strong>發信紀錄</strong>」（CH 15）查那個 Email 有沒有真的寄出去。常見原因：
+    <br>① 投稿者填錯信箱
+    <br>② 信被當垃圾信、請投稿者去垃圾信夾找
+    <br>③ Gmail 帳號還沒設定（你會在後台看到紅色警告 banner）
+  </div>
+</section>
+
+<!-- ════════════════ PART 03 ════════════════ -->
+<section class="part-divider">
+  <div class="pt-label">PART 03</div>
+  <div class="pt-num">03</div>
+  <h2 class="pt-title">你的日常<br>審稿流程</h2>
+  <p class="pt-sub">
+    這部分是你<strong>每天最常用</strong>的功能。讀完這四章你就會 95% 的後台操作。
+    收件匣怎麼用、怎麼審稿、撞期了怎麼辦、寄信前怎麼確認。
+  </p>
+</section>
+
+<!-- CH 6 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 06</div>
+  <h2>進收件匣、<em>認識每個區塊</em></h2>
+  <p class="ch-intro">
+    登入後台第一個看到的就是「收件匣」。所有投稿都在這。
+    這頁有 6 個區塊、一個一個帶你看。
+  </p>
+
+  <figure>
+    <img src="09_admin_inbox.png">
+    <figcaption>收件匣全貌。從上到下：左側 sidebar / 4 個統計卡 / 趨勢圖 / 批次處理提示 / 9 個狀態 tab / 篩選工具列 / 稿件表格。</figcaption>
+  </figure>
+
+  <h3>① 左側 sidebar — 跳去其他頁</h3>
+  <p>左側深色 sidebar 有 8 個入口（從上到下）：</p>
+  <table>
+    <tr><th>項目</th><th>用來做什麼</th></tr>
+    <tr><td><strong>收件匣</strong></td><td>就是當下這頁、看所有稿件</td></tr>
+    <tr><td><strong>重複日期</strong></td><td>看哪幾天有多人投、要裁決</td></tr>
+    <tr><td><strong>Email 通知信模板</strong></td><td>編輯寄出去的信長什麼樣（見 CH 14）</td></tr>
+    <tr><td><strong>出貨管理</strong></td><td>地址收齊後、填單號寄通知信（見 CH 13）</td></tr>
+    <tr><td><strong>編輯日曆</strong></td><td>365 天鳥瞰、看哪天滿了哪天還空（見 CH 10）</td></tr>
+    <tr><td><strong>製稿匯出</strong></td><td>產 Excel 給美工設計師（見 CH 12）</td></tr>
+    <tr><td><strong>發信紀錄</strong></td><td>客服查投稿者有沒有收到信（見 CH 15）</td></tr>
+    <tr><td><strong>網站設定</strong></td><td>Gmail 帳號設定（見 CH 2）</td></tr>
+  </table>
+
+  <h3>② 上方 4 個統計卡</h3>
+  <p>一眼看出整體狀態：<strong>全部投稿、待審稿件、已過稿、日曆覆蓋率</strong>。日曆覆蓋率（X / 365）就是年度進度條。</p>
+
+  <h3>③ 投稿趨勢圖</h3>
+  <p>近 30 天每天的投稿量折線圖。可以看出「徵稿熱度」、決定要不要在社群催稿。</p>
+
+  <h3>④ 批次未入選處理</h3>
+  <p>橘黃色的小提示。<strong>等到入選名單都定了</strong>、按下去可以把所有還沒裁決的稿件一鍵改成「不採用」、可選用發感謝信。<strong>這操作不可逆、會跳兩次確認</strong>、平常不用碰。</p>
+
+  <h3>⑤ 9 個狀態 Tab</h3>
+  <p>切換不同狀態的稿件。每個 tab 旁邊都有<strong>即時數字</strong>、看一眼就知道哪邊有幾篇等處理：</p>
+  <table>
+    <tr><th style="width:30%">Tab 名稱</th><th>什麼意思</th></tr>
+    <tr><td><span class="badge gray">全部</span></td><td>不分狀態、所有稿件</td></tr>
+    <tr><td><span class="badge gray">待驗證</span></td><td>投稿者還沒點 Email 驗證信</td></tr>
+    <tr><td><span class="badge gray">待審</span></td><td>已驗證、等你看</td></tr>
+    <tr><td><span class="badge warn">審稿中</span></td><td>你正在看、還沒下決定</td></tr>
+    <tr><td><span class="badge ok">已過稿</span></td><td>你決定收這篇</td></tr>
+    <tr><td><span class="badge warn">需補件</span></td><td>已請投稿者改稿、等他回</td></tr>
+    <tr><td><span class="badge ok">補件已回</span></td><td>投稿者改好了、等你二審</td></tr>
+    <tr><td><span class="badge warn">需改期</span></td><td>三志願都被佔了、等投稿者回覆新日期</td></tr>
+    <tr><td><span class="badge danger">已退稿</span></td><td>你決定不收這篇</td></tr>
+  </table>
+
+  <h3>⑥ 篩選工具列</h3>
+  <p>表格上方有<strong>搜尋框 + 5 個篩選</strong>：</p>
+  <ul>
+    <li><strong>全文搜尋</strong>：找標題、姓名、筆名、Email、內文（任何文字）</li>
+    <li><strong>排序</strong>：最新 / 最舊 / 字數多寡 / 標題 A-Z</li>
+    <li><strong>字數</strong>：300-500 / 500-700 / 700-1000 / 全部</li>
+    <li><strong>圖片</strong>：有 / 無 / 全部</li>
+    <li><strong>電話</strong>：有 / 無 / 全部</li>
+    <li><strong>標籤</strong>：選某個主題標籤過濾</li>
+  </ul>
+
+  <h3>⑦ 稿件表格</h3>
+  <p>表格列出符合條件的稿件、欄位：編號 / 首選日 / 故事標題 / 投稿者 / 字數 / 圖片數 / 狀態 / 投稿時間。最左邊有 checkbox 可以批次選、選多筆後可以一次改狀態。</p>
+</section>
+
+<!-- CH 7 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 07</div>
+  <h2>點進一篇稿件<em>來審</em></h2>
+  <p class="ch-intro">
+    在收件匣表格上點任一篇稿件、就會進入「稿件詳情頁」。這頁包含你審稿要看的所有資訊。
+  </p>
+
+  <figure>
+    <img src="10_admin_detail.png">
+    <figcaption>稿件詳情頁。左邊是故事內文 + 附圖、右邊是編輯狀態 + 投稿志願 + 標籤 + 投稿者 + 寄信歷史 + 授權狀態。</figcaption>
+  </figure>
+
+  <h3>左邊 · 故事內文 + 附圖</h3>
+  <p>讀全文用的。附圖點開可以放大看。</p>
+
+  <h3>右邊 · 編輯狀態（最常用）</h3>
+  <p>9 個狀態按鈕排成一列。<strong>點下去立刻儲存、不用按存檔</strong>。如果切換到會「寄信」的狀態（已過稿、已退稿、需改期）、會跳<strong>預覽 modal</strong> 讓你確認再寄（見 CH 8）。</p>
+
+  <h3>右邊 · 後台備註</h3>
+  <p>內部筆記、投稿者看不到。寫好點到其他地方就<strong>自動存</strong>。常見用法：</p>
+  <ul>
+    <li>「文筆好、但圖片太暗、要重傳」</li>
+    <li>「待二審」</li>
+    <li>「想用、但日期撞 5/21、看撞期裁決」</li>
+  </ul>
+
+  <h3>右邊 · 寄信歷史</h3>
+  <p>這篇稿件寄過的所有信都列在這裡。每筆顯示<strong>時間 + 模板名稱 + 寄出狀態</strong>：</p>
+  <ul>
+    <li><span class="badge ok">✓ 已寄</span> 實際寄出去了</li>
+    <li><span class="badge danger">✗ 失敗</span> SMTP 報錯（會顯示錯誤訊息）</li>
+    <li><span class="badge warn">○ Gmail 未設</span> 還沒設 Gmail、信沒寄</li>
+  </ul>
+  <p>客服很有用：投稿者問「我有沒有收到信」、來這頁查。</p>
+
+  <h3>右邊 · ✉ 寄請修改信按鈕</h3>
+  <p>需要請投稿者改稿時用。流程：</p>
+  <ol class="steps">
+    <li>在「後台備註」寫清楚要改什麼（「字數不到 300、請補齊」）</li>
+    <li>按 <strong>✉ 寄請修改信</strong></li>
+    <li>跳確認對話框、按確定</li>
+    <li>系統自動寄信給投稿者、信裡有<strong>連結</strong>（7 天有效）他點進去就能改稿（含重傳照片）</li>
+    <li>狀態自動變 <span class="badge warn">需補件</span></li>
+    <li>投稿者改完後狀態自動變 <span class="badge ok">補件已回</span>、回到審稿池讓你二審</li>
+  </ol>
+</section>
+
+<!-- CH 8 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 08</div>
+  <h2>改狀態 + <em>寄信前的預覽確認</em></h2>
+  <p class="ch-intro">
+    這個系統的設計：<strong>狀態改了系統不會直接寄信、而是先跳預覽 modal 讓你看了再決定要不要寄</strong>。
+    避免不小心點到「已過稿」就寄出去、沒辦法收回。
+  </p>
+
+  <h3>哪些狀態會跳寄信 modal？</h3>
+  <table>
+    <tr><th>你改的狀態</th><th>系統建議寄的信</th></tr>
+    <tr><td><span class="badge ok">已過稿</span></td><td>T5 入選通知信（附地址填寫連結）</td></tr>
+    <tr><td><span class="badge danger">已退稿</span></td><td>退稿通知信（可選）</td></tr>
+    <tr><td><span class="badge warn">需改期</span></td><td>T4 改期溝通信（請投稿者回覆新日期）</td></tr>
+  </table>
+  <p>其他狀態切換（待審、審稿中、撞期、需補件 等）<strong>不跳 modal</strong>、單純改狀態。</p>
+
+  <h3>Modal 長這樣</h3>
+
+  <figure>
+    <img src="21_mail_preview_modal.png">
+    <figcaption>寄信預覽 Modal。上方顯示收件人 + 主旨、下方 iframe 顯示完整信件內容（投稿者實際會看到的樣子）。</figcaption>
+  </figure>
+
+  <h3>Modal 操作</h3>
+  <ol class="steps">
+    <li>看一下<strong>收件人</strong>對不對</li>
+    <li>看一下<strong>主旨</strong>對不對</li>
+    <li>滾動 iframe 看完整<strong>信件內容</strong></li>
+    <li>確定要寄、按 <strong>✉ 確認寄出</strong></li>
+    <li>覺得有問題、按 <strong>取消</strong>（狀態還是改了、只是不寄信）</li>
+  </ol>
+
+  <div class="callout warn">
+    <div class="title">⚠ 如果這封信之前已經寄過了…</div>
+    Modal 開的時候會自動檢查歷史。<strong>如果同一封信之前已經寄過</strong>、會跳紅色警告框：「⚠ 這封信之前已經寄過了、最後一次寄出時間是 X」+ 強制你勾 checkbox「我確認知道、還是要再寄一次」、按鈕變紅色「⚠ 確認再寄一次」。
+    <br><br>用途：避免你改狀態改來改去（已過稿 → 審稿中 → 已過稿）導致投稿者收到兩封一樣的入選通知信。
+  </div>
+
+  <h3>七封通知信總覽</h3>
+  <table>
+    <tr><th>編號</th><th>名稱</th><th>什麼時候寄</th></tr>
+    <tr><td>T1</td><td>Email 驗證信</td><td>投稿者送出表單 → <strong>自動寄</strong></td></tr>
+    <tr><td>T2</td><td>投稿成功確認信</td><td>投稿者點驗證連結 → <strong>自動寄</strong></td></tr>
+    <tr><td>T3</td><td>補件通知信</td><td>你按「✉ 寄請修改信」按鈕</td></tr>
+    <tr><td>T4</td><td>改期溝通信</td><td>你改狀態 → 需改期</td></tr>
+    <tr><td>T5</td><td>入選通知信</td><td>你改狀態 → 已過稿</td></tr>
+    <tr><td>T6</td><td>地址催收信</td><td>排程刊登頁找出沒填地址的人、手動觸發（CH 11）</td></tr>
+    <tr><td>T7</td><td>出貨通知信</td><td>出貨頁填單號後觸發（CH 13）</td></tr>
+  </table>
+</section>
+
+<!-- CH 9 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 09</div>
+  <h2>同一天好幾人投<br><em>怎麼辦？撞期裁決</em></h2>
+  <p class="ch-intro">
+    這個系統<strong>最重要的功能之一</strong>。去年大家都搶情人節、母親節、聖誕節這種熱門日、編輯部寫信來回問「能不能換天」、來回 14+ 輪。今年系統幫你自動處理。
+  </p>
+
+  <h3>運作邏輯</h3>
+  <ol class="steps">
+    <li>系統<strong>持續偵測</strong>：發現同一個首選日有 ≥ 2 篇投稿、就列成一組「撞期」</li>
+    <li>左側 sidebar「<strong>重複日期</strong>」會顯示有幾組撞期（如「重複日期 3」）</li>
+    <li>你點進去、看到每一組並排顯示</li>
+    <li>你決定要採用哪一篇、按那篇的「<strong>✓ 採用這篇</strong>」</li>
+    <li>系統自動<strong>處理其他人</strong>：依他們填的志願二/三、找一個還沒被佔的日期、把他補進去</li>
+    <li>實在補不到（三志願都被佔）的人、系統幫你準備好 T4 改期溝通信</li>
+  </ol>
+
+  <figure>
+    <img src="11_admin_duplicate.png">
+    <figcaption>撞期裁決頁。每一組撞期顯示日期 + 候選人數、並排顯示所有候選稿件、有「採用這篇」按鈕。可依字數最多 / 投稿最早 / 投稿最晚 / 標題 A-Z 排序。</figcaption>
+  </figure>
+
+  <h3>採用之後</h3>
+  <p>系統<strong>不會立刻寄信</strong>。會在裁決頁上方顯示「待寄通知信」清單、列出 winner 一封 T5 + 每個 loser 各自要寄的信。<strong>每筆都有「預覽 + 寄」按鈕</strong>、你逐一確認後寄。</p>
+
+  <div class="callout ok">
+    <div class="title">✓ 自動遞補 = 救你一命</div>
+    舉例：3 人都選 5/21 為首選。
+    <br>① A 的次選是 5/23、B 的次選是 5/22、C 的次選沒填
+    <br>② 你選 A 採用 5/21
+    <br>③ 系統自動把 B 補到 5/22、C 改成「需改期」
+    <br>④ 三封信你逐一預覽 + 寄出
+    <br><br>整個過程不用寫一個字。
+  </div>
+</section>
+
+<!-- ════════════════ PART 04 ════════════════ -->
+<section class="part-divider">
+  <div class="pt-label">PART 04</div>
+  <div class="pt-num">04</div>
+  <h2 class="pt-title">入選名單<br>確定後</h2>
+  <p class="pt-sub">
+    審稿結束、把名單發出去之後的事。
+    地址收集、地址催收、給美工做日曆的 Excel、出貨。
+  </p>
+</section>
+
+<!-- CH 10 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 10</div>
+  <h2>看 365 日曆<br><em>確認年度覆蓋率</em></h2>
+  <p class="ch-intro">
+    一頁看完全年 365 天哪些日期已經有故事、哪些還是空的。
+    審稿過程隨時看、知道還缺什麼。
+  </p>
+
+  <figure>
+    <img src="12_admin_calendar.png">
+    <figcaption>365 天日曆鳥瞰。每天一格、依顏色標示狀態。最上面顯示「已排定 X / 365」整體覆蓋率。</figcaption>
+  </figure>
+
+  <h3>顏色意思</h3>
+  <table>
+    <tr><th style="width:30%">顏色</th><th>意義</th><th>點下去會去哪</th></tr>
+    <tr><td><span class="badge ok">綠色</span></td><td>這天已經有人入選、確定刊登</td><td>看那篇稿件詳情</td></tr>
+    <tr><td><span class="badge danger">橘色</span></td><td>有人投稿、還沒裁決（待審或撞期）</td><td>撞期裁決頁或待審清單</td></tr>
+    <tr><td style="color:#888">灰底虛線</td><td>沒人投這天</td><td>—（你可以考慮對特定日期主動邀稿）</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <div class="title">💡 怎麼用</div>
+    徵稿期間每週看一次、注意還有哪些大日子是空的（例如清明、端午、中秋）、
+    可以提早在社群上推「我們還缺幾月幾號的故事、歡迎投稿」。
+  </div>
+</section>
+
+<!-- CH 11 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 11</div>
+  <h2>地址催收<br><em>找出沒填地址的人</em></h2>
+  <p class="ch-intro">
+    入選通知信寄出後、入選者點信中連結直接填地址。但有些人會拖到忘記。
+    這時候用「地址催收」找出他們、寄催收信。
+  </p>
+
+  <figure>
+    <img src="13_admin_scheduled.png">
+    <figcaption>排程刊登頁。最上面是「📬 地址催收」區塊、可調門檻、找出超過 N 天還沒填地址的人。下面是已指派日期 / 尚待排程兩個區塊。</figcaption>
+  </figure>
+
+  <h3>怎麼用</h3>
+  <ol class="steps">
+    <li>進<strong>排程刊登</strong>頁（sidebar 那個沒列出來、從首頁進去）</li>
+    <li>看上方「📬 地址催收」區塊</li>
+    <li>調整門檻（預設 7 天、可以改成 5 / 14 天等）</li>
+    <li>按 <strong>找出待催收清單</strong></li>
+    <li>系統列出所有「入選後超過 N 天還沒填地址」的人</li>
+    <li>每筆有「預覽 + 寄」按鈕、逐一確認後寄 T6 地址催收信</li>
+  </ol>
+</section>
+
+<!-- CH 12 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 12</div>
+  <h2>製稿匯出<br><em>給美工設計師的 Excel</em></h2>
+  <p class="ch-intro">
+    入選名單確定後、要把資料交給美工設計實體日曆的版面。
+    這頁產出<strong>標準格式 Excel</strong>、14 欄、給美工直接用。
+  </p>
+
+  <figure>
+    <img src="14_admin_export.png">
+    <figcaption>製稿匯出頁。可以選「全部」或「特定月份」匯出、會顯示這次會匯多少筆 + 預覽前 3 筆。</figcaption>
+  </figure>
+
+  <h3>14 欄位</h3>
+  <ol style="columns: 2; font-size: 10pt;">
+    <li>採用日期（2027/M/D）</li>
+    <li>日期（月）</li>
+    <li>日期（日）</li>
+    <li>星期</li>
+    <li>故事標題</li>
+    <li>故事全文</li>
+    <li>投稿者筆名</li>
+    <li>圖片連結 1</li>
+    <li>圖片連結 2</li>
+    <li>圖片連結 3</li>
+    <li>圖片連結 4</li>
+    <li>圖片連結 5</li>
+    <li>字數</li>
+    <li>採訪授權</li>
+  </ol>
+
+  <h3>怎麼用</h3>
+  <ol class="steps">
+    <li>進「<strong>製稿匯出</strong>」頁</li>
+    <li>選範圍：<strong>全部</strong>（一次給完整年度）<strong>或單月</strong>（分批給不同設計師）</li>
+    <li>按 <strong>匯出 Excel</strong></li>
+    <li>下載的檔案直接給美工、檔名自動帶年份避免跟去年混淆</li>
+  </ol>
+
+  <div class="callout">
+    <div class="title">不會洩漏投稿者個資</div>
+    Excel 裡<strong>不包含</strong>投稿者的 Email、電話、地址。只有美工需要的稿件內容 + 筆名。
+  </div>
+</section>
+
+<!-- CH 13 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 13</div>
+  <h2>出貨<br><em>填單號 + 寄出貨通知信</em></h2>
+  <p class="ch-intro">
+    印好的實體日曆要寄給入選者。
+    這頁列出所有已填地址的入選者、你填上物流商 + 單號、按一鍵寄通知信給對方。
+  </p>
+
+  <figure>
+    <img src="18_admin_shipping.png">
+    <figcaption>出貨管理頁。上方有「同人多篇合併建議」區塊（藍底）、中間是「待出貨」清單、下方是「已出貨」清單。</figcaption>
+  </figure>
+
+  <h3>怎麼用</h3>
+  <ol class="steps">
+    <li>進「<strong>出貨管理</strong>」頁</li>
+    <li>看「<strong>同人多篇合併建議</strong>」（藍色區塊）— 如果有同一個投稿者入選 ≥ 2 篇、系統建議你合併寄一個包裹節省運費</li>
+    <li>下方「待出貨」清單列出所有要寄的人 + 地址</li>
+    <li>每一筆右側：<strong>選物流商</strong>（新竹物流 / 全家店到店 / 中華郵政 / 宅配通 / 黑貓宅急便）</li>
+    <li>填<strong>出貨單號</strong></li>
+    <li>按 <strong>預覽 + 寄 T7</strong>、跳 modal 確認後寄出</li>
+    <li>寄完那筆會自動移到「已出貨」清單</li>
+  </ol>
+</section>
+
+<!-- ════════════════ PART 05 ════════════════ -->
+<section class="part-divider">
+  <div class="pt-label">PART 05</div>
+  <div class="pt-num">05</div>
+  <h2 class="pt-title">進階設定<br>+ 常見問題</h2>
+  <p class="pt-sub">
+    需要時再翻。包含 Email 模板要怎麼自訂、客服問題怎麼查、以及 7 個最常被問的問題。
+  </p>
+</section>
+
+<!-- CH 14 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 14</div>
+  <h2>編輯通知信模板<br><em>Email 內容自己改</em></h2>
+  <p class="ch-intro">
+    系統內建七封通知信模板（T1-T7）。每一封的主旨、內文 HTML、寄件人署名你都可以自己改。
+    改完<strong>立刻生效</strong>、下次寄信就用新版本。
+  </p>
+
+  <figure>
+    <img src="15_admin_flow.png">
+    <figcaption>Email 通知信模板首頁。左邊列出 7 封模板、右邊「即時預覽」顯示選中的那封信長什麼樣。</figcaption>
+  </figure>
+
+  <h3>怎麼改</h3>
+  <ol class="steps">
+    <li>進「<strong>Email 通知信模板</strong>」頁</li>
+    <li>左邊點你想改的模板（如「T5 入選通知信」）</li>
+    <li>按上方 <strong>✎ 編輯模板</strong> 進編輯模式</li>
+  </ol>
+
+  <figure>
+    <img src="16_admin_flow_edit.png">
+    <figcaption>編輯模式。左邊填主旨 + 內文 HTML、中間是可用變數說明、右邊是即時預覽（你改一個字、右邊立刻反映）。</figcaption>
+  </figure>
+
+  <h3>什麼是「變數」？</h3>
+  <p>變數就是「自動填入投稿者資料」的標記。用<strong>雙大括號</strong>包起來、寄信時系統會自動把它換成真實值：</p>
+  <table>
+    <tr><th>變數</th><th>實際寄信時會變成</th></tr>
+    <tr><td><code>{{authorName}}</code></td><td>投稿者姓名（如「陳怡萱」）</td></tr>
+    <tr><td><code>{{title}}</code></td><td>稿件標題（如「奶奶的縫紉機」）</td></tr>
+    <tr><td><code>{{assignedDate}}</code></td><td>採用日期（如「05/21」）</td></tr>
+    <tr><td><code>{{addressUrl}}</code></td><td>地址填寫連結（T5 入選通知信用）</td></tr>
+    <tr><td><code>{{trackingNumber}}</code></td><td>出貨單號（T7 出貨通知信用）</td></tr>
+    <tr><td><code>{{carrierName}}</code></td><td>物流商名稱（T7 用）</td></tr>
+  </table>
+
+  <p>例如主旨寫 <code>協作徵稿平台｜「{{title}}」入選通知</code>、實際寄出去會變成 <code>協作徵稿平台｜「奶奶的縫紉機」入選通知</code>。</p>
+
+  <h3>改完之後</h3>
+  <ol class="steps">
+    <li>右邊預覽看起來對的、按 <strong>💾 儲存</strong></li>
+    <li>下次該模板觸發寄信就用新版本</li>
+    <li>覺得改壞了、按 <strong>重設為預設</strong> 回到原版</li>
+  </ol>
+</section>
+
+<!-- CH 15 -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 15</div>
+  <h2>發信紀錄<br><em>客服查詢用</em></h2>
+  <p class="ch-intro">
+    系統寄出去的每一封信都會留紀錄。客服時很有用 — 投稿者問「我為什麼沒收到信」、來這頁查。
+  </p>
+
+  <figure>
+    <img src="17_admin_email_logs.png">
+    <figcaption>發信紀錄頁。所有寄出去的信按時間排序、含時間、模板、收件人、狀態、錯誤訊息。</figcaption>
+  </figure>
+
+  <h3>每筆紀錄會顯示</h3>
+  <ul>
+    <li><strong>時間</strong>：什麼時候寄的</li>
+    <li><strong>模板</strong>：T1 / T2 / T3 / T4 / T5 / T6 / T7 哪一封</li>
+    <li><strong>收件人</strong>：寄到哪個 Email</li>
+    <li><strong>主旨</strong>：信件的主旨</li>
+    <li><strong>狀態</strong>：
+      <span class="badge ok">已寄</span>（成功）/
+      <span class="badge danger">失敗</span>（SMTP 報錯、有錯誤訊息）/
+      <span class="badge warn">略過</span>（Gmail 未設、整封信沒寄）
+    </li>
+  </ul>
+
+  <div class="callout tip">
+    <div class="title">跟稿件詳情頁的「寄信歷史」差別？</div>
+    這頁是<strong>所有</strong>稿件的信件總表（一頁看全部）、稿件詳情頁的歷史只看<strong>單一</strong>稿件（一篇看到底）。
+  </div>
+</section>
+
+<!-- CH 16 FAQ -->
+<section class="chapter">
+  <div class="ch-tag">CHAPTER 16 · FAQ</div>
+  <h2>常見問題<br><em>7 個最常被問的</em></h2>
+
+  <div class="qa-q">為什麼一個故事可以填三個日期？這樣不會假嗎？</div>
+  <div class="qa-a">
+    <strong>確實有點假</strong>、是個設計妥協。會有兩種情境：
+    <ul style="margin: 2mm 0 2mm 5mm; line-height: 1.85;">
+      <li><strong>故事跟特定日期強綁定</strong>（如「我們在 5/21 那天搬家」）→ 投稿者只應該填 1 個、撞期走「需改期」人工處理</li>
+      <li><strong>故事是「主題」對應</strong>（如「奶奶的縫紉機」→ 母親節 / 奶奶生日 / 清明節都可以）→ 投稿者填 3 個志願、撞期系統自動遞補</li>
+    </ul>
+    系統賭的是「大部分故事是主題對應、可以彈性」。但實務上投稿者可能亂填三個日期、結果被自動排到他不想要的那天。這是合約寫死的設計、二期內無法改、可以在客戶免費迭代額度內提改善（如表單加說明、或兩階段問法）。
+  </div>
+
+  <div class="qa-q">我改了狀態系統會自動寄信嗎？</div>
+  <div class="qa-a">
+    <strong>不會直接寄</strong>。改成「已過稿」「已退稿」「需改期」會跳<strong>預覽 modal</strong>讓你看了再決定要不要寄。其他狀態切換不跳 modal、就只改狀態。投稿者那兩封信（T1 驗證信、T2 投稿成功確認）例外、由投稿者操作觸發、保留自動。
+  </div>
+
+  <div class="qa-q">我改了狀態又改回來、再改回去、會重複寄信嗎？</div>
+  <div class="qa-a">
+    <strong>不會</strong>。預覽 modal 開的時候會自動查歷史、如果同一封信之前寄過、會跳<strong>紅色警告</strong>「⚠ 這封信之前已經寄過了」+ 要勾 checkbox「我確認還是要再寄」才能按確認鈕。防止你不小心改來改去寄重複信給投稿者。
+  </div>
+
+  <div class="qa-q">投稿者一定要用 Gmail 才能投稿嗎？</div>
+  <div class="qa-a">
+    <strong>不是</strong>。投稿者可以填 yahoo、outlook、pchome、iCloud 任何信箱。後台「Gmail 寄信帳號」是<strong>編輯部寄信用</strong>的、跟投稿者完全無關。
+  </div>
+
+  <div class="qa-q">sidebar「重複日期」跟狀態 button「撞期」差在哪？</div>
+  <div class="qa-a">
+    <ul>
+      <li><strong>sidebar「重複日期」</strong>：系統<strong>自動偵測</strong>「同首選日 ≥ 2 篇」、顯示組數</li>
+      <li><strong>狀態 button「撞期」</strong>：你手動把某一篇標成「撞期、等裁決」、是單一稿件的狀態</li>
+    </ul>
+    實際操作上、看自動偵測就夠了。狀態 button 不是必要操作。
+  </div>
+
+  <div class="qa-q">已過稿之後地址連結會有效多久？</div>
+  <div class="qa-a">
+    <strong>180 天</strong>（從稿件改成「已過稿」開始算）。對於 5 月入選、12 月才出貨的流程來說綽綽有餘。
+  </div>
+
+  <div class="qa-q">補件信寄出後、投稿者改稿可以重傳照片嗎？</div>
+  <div class="qa-a">
+    <strong>可以</strong>。補件頁有「重傳照片」選項。投稿者上傳新圖會<strong>整批替換</strong>舊圖（不是疊加）、避免堆積。如果只是改文字、不傳新圖就會保留原本照片。
+  </div>
+</section>
+
+<div class="doc-footer">
+  協作徵稿平台 編輯部操作手冊 · 第二階段交付版本 · © 2026 次元創意有限公司 · 為冠球彩色印刷股份有限公司製作
+</div>
+
+</body>
+</html>

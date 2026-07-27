@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>{{TITLE}}</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+    }
+    body {
+      color: #151515;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      font-size: 11.2pt;
+      line-height: 1.55;
+      margin: 0;
+      background: #fff;
+    }
+    h1, h2, h3 {
+      line-height: 1.22;
+      margin: 0 0 10px;
+      color: #111;
+    }
+    h1 {
+      font-size: 25pt;
+      letter-spacing: 0;
+      margin-top: 12mm;
+    }
+    h2 {
+      font-size: 17pt;
+      margin-top: 18mm;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #111;
+      break-after: avoid;
+    }
+    h3 {
+      font-size: 13.5pt;
+      margin-top: 11mm;
+      break-after: avoid;
+    }
+    p { margin: 0 0 8px; }
+    ul, ol { margin: 4px 0 10px 20px; padding: 0; }
+    li { margin: 2px 0 5px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 14px;
+      font-size: 9.7pt;
+      break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid #b9b9b9;
+      padding: 6px 7px;
+      vertical-align: top;
+    }
+    th {
+      background: #f1f3f4;
+      text-align: left;
+      font-weight: 700;
+    }
+    .cover {
+      min-height: 245mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      page-break-after: always;
+    }
+    .eyebrow {
+      color: #555;
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 14pt;
+      color: #333;
+      margin-top: 10px;
+      max-width: 150mm;
+    }
+    .meta {
+      margin-top: 18mm;
+      color: #444;
+      font-size: 10.5pt;
+    }
+    .note {
+      border-left: 4px solid #111;
+      padding: 8px 12px;
+      background: #f7f7f7;
+      margin: 10px 0 14px;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid #444;
+      border-radius: 999px;
+      padding: 1px 7px;
+      font-size: 8.5pt;
+      white-space: nowrap;
+    }
+    .p0 { background: #111; color: #fff; border-color: #111; }
+    .p1 { background: #eceff1; color: #111; }
+    .p2 { background: #fff; color: #333; }
+    .small { font-size: 9.5pt; color: #555; }
+    .page-break { page-break-before: always; }
+    .todo-title { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="eyebrow">PM Handoff Document</div>
+    <h1>{{TITLE}}</h1>
+    <p class="subtitle">{{SUBTITLE}}</p>
+    <div class="meta">
+      <p><strong>影片來源：</strong>{{VIDEO_SOURCE}}</p>
+      <p><strong>會議長度：</strong>{{VIDEO_DURATION}}</p>
+      <p><strong>文件產出：</strong>{{DOC_DATE}}</p>
+      <p><strong>主要結論：</strong>{{MAIN_CONCLUSION}}</p>
+    </div>
+  </section>
+
+  <h2>一、PM 給工程師的總要求</h2>
+  <div class="note">
+    <p><strong>完成定義：</strong>{{COMPLETION_DEFINITION}}</p>
+  </div>
+  <ul>
+    {{DEADLINE_LIST}}
+  </ul>
+
+  <h2>二、工程修改清單</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 13%">優先級</th>
+        <th style="width: 23%">項目</th>
+        <th>修改內容</th>
+        <th style="width: 28%">驗收標準</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ENGINEERING_ITEMS_TABLE}}
+    </tbody>
+  </table>
+
+  <h2>三、驗收矩陣</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>場景</th>
+        <th>必測裝置 / 入口</th>
+        <th>驗收重點</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ACCEPTANCE_MATRIX_TABLE}}
+    </tbody>
+  </table>
+
+  <h2 class="page-break">四、完整會議記錄</h2>
+  {{MEETING_NOTES}}
+
+  <h2>五、後續追蹤建議</h2>
+  <ol>
+    {{FOLLOWUP_LIST}}
+  </ol>
+
+  <p class="small">備註：本文件由影片音訊自動轉錄後整理；逐字稿中部分人名與專有名詞可能有辨識誤差，工程派工請以本文件整理後的需求與 Figma/素材檔為準。</p>
+</body>
+</html>
